@@ -31,7 +31,7 @@ class Params:
 The Gene class represents a single gene and holds information about a source and sink number.
 ```python
 class Gene:
-    def __init__(self,):
+    def __init__(self,): # Sink number represents the actions a gene could take
         self.sourceNum = random.randint(0,7)
         self.sinkNum = random.randint(0,12)
     def makeCustomGene(self, source, sink, weight):
@@ -54,14 +54,14 @@ class Genome:
         self.genes.append(gene)
         
     def mutate(self):
-        for i in range(random.randrange(p.mutationRate)):
+        for i in range(random.randrange(p.mutationRate)): # It loops a random number of times based on mutationRate
             if random.random() <= 0.5:
                 mutated_gene = random.randrange(len(self.genes))
-                self.genes[mutated_gene].weight = random.uniform(-4.0, 4.0)
+                self.genes[mutated_gene].weight = random.uniform(-4.0, 4.0) # It randomly selects a gene in the genes list sets the weight to a random value
         return self
         
 
-def makeRandomGenome():
+def makeRandomGenome(): # Creates a genome, and appends the Gene class to the genome: 'genes' list.
     genome = Genome()
     length = random.randint(p.minGenomeLength, p.maxGenomeLength)
     for _ in range(length):
@@ -117,7 +117,7 @@ class Life:
 
     class Creature:
             
-
+        # Find the distance from an alien
         def DETECTION_ALIEN_RADIUS(self):
             distances = []
             for j in range(len(species_list)):
@@ -130,7 +130,7 @@ class Life:
             distances.sort(reverse=True)
             return distances[0] if len([i for i in range(len(species_list)) if i != self.index]) > 0 else 0
             
-
+        # Find the distance from family
         def DETECTION_FAMILY_RADIUS(self):
             distances = []
             for i in range(len(species_list[self.index].creature_list)):
@@ -140,47 +140,50 @@ class Life:
             distances.sort(reverse=True)
             return distances[0] if len(species_list[self.index].creature_list) > 0 else 0
             
-
+        # Change coordinates randomly
         def MOVE_RANDOM(self):
             self.x = (self.x + random.randint(-self.speed, self.speed))%p.grid_width
             self.y = (self.y + random.randint(-self.speed, self.speed))%p.grid_height
             self.hunger += 1
             self.age += 1 
             
+        
         def MOVE_X(self):
             self.x = (self.x + random.randint(-self.speed, self.speed))%p.grid_width
             self.hunger += 1
             self.age += 1 
-            
+        
+        
         def MOVE_Y(self):
             self.y = (self.y + random.randint(-self.speed, self.speed))%p.grid_height
             self.hunger += 1
             self.age += 1 
             
-
+        # Changes a single coordinate to the modulo of the grid
         def MOVE_EAST(self):
             self.x = (self.x + self.speed)%p.grid_width
             self.hunger += 1
             self.age += 1
             
-
+        
         def MOVE_WEST(self):
             self.x = (self.x - self.speed)%p.grid_width
             self.hunger += 1
             self.age += 1
             
-
+        # Increases y to the mod of grid
         def MOVE_NORTH(self):
             self.y = (self.y + self.speed)%p.grid_height
             self.hunger += 1
             self.age += 1
             
-
+        
         def MOVE_SOUTH(self):    
             self.y = (self.y - self.speed)%p.grid_height
             self.hunger += 1
             self.age += 1
 
+        # Duplicates and mutates an offspring if the following requirements are met
         def REPRODUCE(self):
             if self.hunger < 10 and self.age > 8 and self.health > 0 and random.random() <= 0.5:
                 species_list[self.index].creature_list.append(
@@ -194,7 +197,7 @@ class Life:
                     )
                 )
 
-
+        # This is how the creatures eat and get food
         def KILL_FORWARD(self):
             for i in range(len(species_list[self.enemy_index].creature_list)):
                 if abs(self.x - species_list[self.enemy_index].creature_list[i].x) <= self.vision and abs(self.y - species_list[self.enemy_index].creature_list[i].y) <= self.vision:
@@ -207,18 +210,18 @@ class Life:
                     return True
             return False
             
-
+        #  Randomly select an input from 1 to 0
         def RANDOM(self):
             return random.random()
 
-
+        # Make an input depending on how extinct their food is
         def ECO_NICHE(self):
             try:
                 return (p.grid_size/5) / len(species_list[self.enemy_index].creature_list) 
             except ZeroDivisionError: 
                 return 0
         
-                
+        # If their last moves are the same as their direction
         def LAST_MOVE_NORTH(self):
             return 1 if self.orientation[self.last_dir] == "NORTH" else 0
             
@@ -231,7 +234,7 @@ class Life:
         def LAST_MOVE_WEST(self):
             return 1 if self.orientation[self.last_dir] == "WEST" else 0
         
-
+        # Rotate directions
         def ROTATE_RIGHT(self):
             if self.direction + 1 > 3:
                 self.direction = 0
@@ -245,7 +248,7 @@ class Life:
             else:
                 self.direction -= 1
 
-
+        # Move depending on the direction
         def MOVE_FORWARD(self):
             if self.orientation[self.direction] == "NORTH":
                 self.y = (self.y + self.speed)%p.grid_height
@@ -386,9 +389,9 @@ class Life:
                 self.MOVE_LEFTandRIGHT,
             ]            
 
-
+        Use the functions and environment to decide what to do
         def executeActions(self):
-            def possible_actions(self) -> list:
+            def possible_actions(self) -> list: # Create a list of possible actions a single creature can take depending on the sinkNums in their genome.
                 Actions_list = []
                 for gene in self.genome.genes:
                     Actions_list.append(self.Actions[gene.sinkNum])
