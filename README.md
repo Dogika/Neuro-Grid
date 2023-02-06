@@ -1,4 +1,4 @@
-# Life Simulation
+# Life Simulation/Neuro-Grid 0.0.1
 This is a simulation of a virtual ecosystem that allows the user to observe how different species interact with each other. The simulation is written in Python and uses various classes and functions to represent creatures, genomes, and neural networks.
 
 ## Table of Contents
