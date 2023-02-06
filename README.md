@@ -1,6 +1,16 @@
 # Life Simulation
 This is a simulation of a virtual ecosystem that allows the user to observe how different species interact with each other. The simulation is written in Python and uses various classes and functions to represent creatures, genomes, and neural networks.
 
+## Table of Contents
+- [Installation](https://github.com/GlassOfUnstableMilk/Neuro-Grid/tree/main#installation)
+- [Usage](https://github.com/GlassOfUnstableMilk/Neuro-Grid/tree/main#usage)
+- [Classes](https://github.com/GlassOfUnstableMilk/Neuro-Grid/tree/main#classes)
+- [Class: Gene](https://github.com/GlassOfUnstableMilk/Neuro-Grid/tree/main#gene)
+- [Class: Genome](https://github.com/GlassOfUnstableMilk/Neuro-Grid/tree/main#genome)
+- [Class: NeuralNetwork](https://github.com/GlassOfUnstableMilk/Neuro-Grid/tree/main#neuralnetwork)
+- [Class: Life](https://github.com/GlassOfUnstableMilk/Neuro-Grid/tree/main#life)
+- [Requirements](https://github.com/GlassOfUnstableMilk/Neuro-Grid/tree/main#requirements)
+
 ## Installation
 Use your clipboard to crtl+c and crtl+v the Python file onto your prefered IDE.
 
